@@ -60,3 +60,5 @@
 - Updated frontend/README.md to reference prepared standalone component files.
 - Attempted git push to GitHub; failed due to network/proxy (localhost:8680).
 - Expanded README.md with a clearer description of the service purpose and behavior.
+- Renamed project folder to rag-service to match GitHub repo name.
+- Removed stray files ls and ls.pub.
