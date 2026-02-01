@@ -58,3 +58,5 @@
 - Added standalone Angular component files (app.component.*) and bootstrap main.ts in frontend/src.
 - Removed frontend/quick-ui.html (replaced by standalone Angular component setup).
 - Updated frontend/README.md to reference prepared standalone component files.
+- Attempted git push to GitHub; failed due to network/proxy (localhost:8680).
+- Expanded README.md with a clearer description of the service purpose and behavior.
