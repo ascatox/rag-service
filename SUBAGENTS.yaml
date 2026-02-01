@@ -1,0 +1,49 @@
+version: 1
+format: "sub-agent prompts"
+notes: "Run in parallel. Produce concise outputs and update ACTIVITY_LOG.md."
+agents:
+  - id: ingest-pipeline
+    task_ref: ingest-pipeline
+    output_path: "notes/ingest.md"
+    prompt: |
+      You are sub-agent for ingestion pipeline design. Provide details on parsing, chunking, metadata extraction, and incremental ingest strategy.
+      Output format:
+      - Design summary (bullets)
+      - Edge cases
+      - Open questions
+      Update ACTIVITY_LOG.md with your task completion summary.
+
+  - id: retrieval-prompting
+    task_ref: retrieval-prompting
+    output_path: "notes/retrieval.md"
+    prompt: |
+      You are sub-agent for retrieval and prompting design. Specify retrieval configs (topK, rerank), prompt templates, anti-injection measures, and citation formatting rules.
+      Output format:
+      - Retrieval config
+      - Prompt guidance
+      - Citation rules
+      - Open questions
+      Update ACTIVITY_LOG.md with your task completion summary.
+
+  - id: db-schema
+    task_ref: db-schema
+    output_path: "notes/db-schema.md"
+    prompt: |
+      You are sub-agent for DB schema. Propose tables, indexes, and migration notes for Document/Chunk/IngestionRun with pgvector.
+      Output format:
+      - Tables and columns
+      - Indexes
+      - Migration notes
+      Update ACTIVITY_LOG.md with your task completion summary.
+
+  - id: observability
+    task_ref: observability
+    output_path: "notes/observability.md"
+    prompt: |
+      You are sub-agent for observability plan. List metrics, logs, traces, and correlation IDs.
+      Output format:
+      - Metrics
+      - Logs
+      - Traces
+      - Open questions
+      Update ACTIVITY_LOG.md with your task completion summary.

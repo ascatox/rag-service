@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+openai:
+  apiKey: ${OPENAI_API_KEY} # required
+  baseUrl: ${OPENAI_BASE_URL:}
+  model:
+    chat: ${OPENAI_CHAT_MODEL:gpt-4.1-mini} # required
+    embeddings: ${OPENAI_EMBEDDINGS_MODEL:text-embedding-3-large} # required
+
+rag:
+  embedding:
+    dimensions: 3072
+  chunk:
+    sizeTokens: 800
+    overlapTokens: 100
+  retrieval:
+    topK: 6
+    maxChunks: 6
+    maxContextChars: 12000
+    maxDistance: 0.8
+  safety:
+    allowNoCitations: false
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/rag}
+    username: ${DB_USER:rag}
+    password: ${DB_PASSWORD:rag}
+  sql:
+    init:
+      mode: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus

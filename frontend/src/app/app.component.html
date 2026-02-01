@@ -1,0 +1,77 @@
+<section class="shell">
+  <header>
+    <div>
+      <h1>RAG Runbook Assistant</h1>
+      <p>Standalone Angular UI for /ask and /ingest</p>
+    </div>
+    <label>
+      API Base URL
+      <input [(ngModel)]="baseUrl" />
+    </label>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Ask</h2>
+      <label>Question
+        <textarea [(ngModel)]="question" placeholder="e.g. Come faccio il rollback di payments?"></textarea>
+      </label>
+      <div class="row">
+        <label>Mode
+          <select [(ngModel)]="mode">
+            <option value="concise">concise</option>
+            <option value="detailed">detailed</option>
+            <option value="checklist">checklist</option>
+          </select>
+        </label>
+        <label>TopK
+          <input type="number" min="1" max="50" [(ngModel)]="topK" />
+        </label>
+      </div>
+      <div class="row">
+        <label>Service
+          <input [(ngModel)]="service" placeholder="payments" />
+        </label>
+        <label>Environment
+          <input [(ngModel)]="environment" placeholder="prod" />
+        </label>
+      </div>
+      <label>Tags (comma separated)
+        <input [(ngModel)]="tags" placeholder="runbook,rollback" />
+      </label>
+      <button (click)="sendAsk()">Send</button>
+
+      <div class="results" *ngIf="askAnswer">
+        <strong>Answer</strong>
+        <pre>{{ askAnswer }}</pre>
+        <div class="citations">{{ askCitations }}</div>
+        <div class="status">{{ askMeta }}</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Ingest</h2>
+      <label>Path
+        <input [(ngModel)]="path" placeholder="docs/" />
+      </label>
+      <label>Mode
+        <select [(ngModel)]="ingestMode">
+          <option value="full">full</option>
+          <option value="incremental">incremental</option>
+        </select>
+      </label>
+      <label>Include glob (comma separated)
+        <input [(ngModel)]="include" placeholder="**/*.md,**/*.txt" />
+      </label>
+      <label>Exclude glob (comma separated)
+        <input [(ngModel)]="exclude" placeholder="**/node_modules/**" />
+      </label>
+      <button (click)="sendIngest()">Ingest</button>
+
+      <div class="results" *ngIf="ingestOut">
+        <strong>Ingest result</strong>
+        <pre>{{ ingestOut }}</pre>
+      </div>
+    </div>
+  </div>
+</section>

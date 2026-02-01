@@ -1,0 +1,60 @@
+# Activity Log
+
+## 2026-01-31
+- Created TASKS.yaml with parallel tasks for sub-agents.
+- Created ARCH.md with architecture definitions.
+- Created DATA.md with API contracts and data model.
+- Updated SPECS.md with OpenAI provider and Java/Spring Boot latest version note.
+- Created notes/ folder for sub-agent outputs.
+- Added docker-compose.yml for Postgres + pgvector.
+- Added config/app.example.yml and .env.example for DB/OpenAI settings.
+- Added sub-agent outputs: ingestion pipeline, retrieval/prompting, DB schema, and observability plans in notes/.
+- Scaffolded Spring Boot project (pom.xml, RagApplication, application.yml) and config import.
+- Re-ran sub-agent ingest-pipeline and refreshed notes/ingest.md.
+- Added LangChain4j dependencies to pom.xml (core + open-ai).
+- Added OpenAI configuration properties and beans for LangChain4j models.
+- Added validation on OpenAI config properties (apiKey, model names).
+- Clarified required OpenAI config fields in config/app.example.yml.
+- Added Liquibase dependency and initial changelog for pgvector schema.
+- Made embedding vector dimension configurable via Liquibase parameter and RAG config.
+- Unified embedding dimension config via rag.embedding.dimensions (used by Liquibase).
+- Added rag properties and startup check for embedding dimension vs model name.
+- Implemented /ask and /ingest controllers with DTOs, error handling, and stub services.
+- Wired /ask to embeddings + pgvector retrieval + LLM response, with citation mapping.
+- Implemented ingest pipeline: file loading, chunking, embeddings, and DB writes (basic).
+- Added PDF parsing via PDFBox and integrated into DocumentLoader.
+- Updated chunking to character-based with token estimate and overlap handling.
+- Added line start/end calculation for chunks to support citation line numbers.
+- Documented lineStart/lineEnd presence in citations in DATA.md.
+- Added placeholder -1 for missing citation line numbers; documented in DATA.md.
+- Added validation guard for citation lineStart/lineEnd to allow -1 placeholder.
+- Added notes/ingest.md with ingestion pipeline design details and open questions.
+- Added notes/retrieval.md with retrieval and prompting design details.
+- Added notes/db-schema.md with schema/index/migration notes.
+- Added notes/observability.md with metrics/logs/tracing plan.
+- Strengthened retrieval prompting: added distance-aware chunk selection, context limits, and inline citation guidance.
+- Set default rag.retrieval.maxDistance to 0.8 in config/app.example.yml.
+- Documented maxDistance default and tuning guidance in notes/retrieval.md.
+- Added Micrometer tracing/OTLP deps, custom RAG metrics, and instrumentation for retrieval/LLM/ingest.
+- Added OpenTelemetry spans for ingest and ask flows and a Tracer bean.
+- Added unit test for chunker line numbers and E2E test with Testcontainers (pgvector) for /ingest and /ask.
+- Added Testcontainers BOM to manage versions in pom.xml.
+- Added explicit Testcontainers versions for junit-jupiter and postgresql deps.
+- Downgraded Testcontainers version to 1.20.4 due to missing 2.0.3 artifacts.
+- Set Java version to 21 (LTS) to match available JDK for tests.
+- mvn test failed: installed JDK does not support release 21 (and 25). Needs JDK 21+ or downgrade source level.
+- Temporarily downgraded Java version to 17 to match installed JDK for tests.
+- Fixed LangChain4j API usage (ChatModel, embed().content()), PDFBox Loader, JDBC execute ambiguity, and test compatibility with Java 17.
+- Switched E2E test to MockMvc/ObjectMapper and removed TestRestTemplate usage; fixed List.getFirst in test.
+- Added spring-boot-test-autoconfigure for MockMvc test support.
+- Reworked E2E test to build MockMvc manually (removed AutoConfigureMockMvc annotation).
+- Marked E2E test to disable when Docker is unavailable.
+- mvn test passed; E2E test skipped due to missing Docker (Testcontainers disabledWithoutDocker).
+- Added README.md with quick start and testing notes.
+- Added RELEASE_CHECKLIST.md for release steps.
+- Attempted Angular CLI scaffold via npx; failed due to npm registry network (ENOTFOUND).
+- Added manual Angular frontend skeleton under frontend/ with placeholder UI and styles.
+- Added frontend/quick-ui.html single-page UI for /ask and /ingest.
+- Added standalone Angular component files (app.component.*) and bootstrap main.ts in frontend/src.
+- Removed frontend/quick-ui.html (replaced by standalone Angular component setup).
+- Updated frontend/README.md to reference prepared standalone component files.

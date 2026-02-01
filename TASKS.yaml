@@ -1,0 +1,48 @@
+version: 1
+purpose: "Parallel tasks for sub-agents"
+created_by: "codex"
+tasks:
+  - id: ingest-pipeline
+    title: "Define ingestion pipeline details"
+    description: "Detail parsing, chunking, metadata extraction, and incremental ingest strategy."
+    parallel: true
+    assignee: "sub-agent"
+    outputs:
+      - "Ingestion design notes"
+    status: "todo"
+
+  - id: retrieval-prompting
+    title: "Define retrieval + prompting details"
+    description: "Specify retrieval configs, prompt templates, anti-injection measures, and citation formatting rules."
+    parallel: true
+    assignee: "sub-agent"
+    outputs:
+      - "Retrieval/prompting design notes"
+    status: "todo"
+
+  - id: db-schema
+    title: "Draft DB schema for pgvector"
+    description: "Propose tables, indexes, and migrations for Document/Chunk/IngestionRun."
+    parallel: true
+    assignee: "sub-agent"
+    outputs:
+      - "Schema proposal"
+    status: "todo"
+
+  - id: observability
+    title: "Observability plan"
+    description: "List metrics, logs, traces, and IDs for correlation."
+    parallel: true
+    assignee: "sub-agent"
+    outputs:
+      - "Observability notes"
+    status: "todo"
+
+  - id: activity-log-setup
+    title: "Create activity log markdown"
+    description: "Initialize ACTIVITY_LOG.md to track all activities (date, task, outcome)."
+    parallel: true
+    assignee: "sub-agent"
+    outputs:
+      - "ACTIVITY_LOG.md created"
+    status: "done"

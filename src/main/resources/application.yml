@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: rag-service
+  config:
+    import: "optional:file:config/app.yml"
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    parameters:
+      embeddingDimensions: ${rag.embedding.dimensions:3072}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,prometheus
